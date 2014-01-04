@@ -1,0 +1,4 @@
+javaee7crud\RecordManagedBean.class
+javaee7crud\entities\Record.class
+javaee7crud\repositories\RecordRepository.class
+javaee7crud\repositories\RecordRepositoryDatabase.class

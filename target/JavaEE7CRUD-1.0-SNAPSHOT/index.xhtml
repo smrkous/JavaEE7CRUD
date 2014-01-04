@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>JavaEE 7 Test | Note CRUD</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+                <h:form id="form1">
+                    <p:dataTable id="data-table" value="#{recordManagedBean.list}" var="record" editable="true"> 
+                        <p:ajax event="rowEdit" listener="#{recordManagedBean.onRowEdit}" />  
+
+                        <p:column style="width:6%">  
+                            #{record.id} 
+                        </p:column>
+                        <p:column headerText="Notes">  
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{record.content}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{record.content}" style="width:100%"/>  
+                                </f:facet> 
+                            </p:cellEditor>  
+                        </p:column> 
+
+                        <p:column style="width:6%">  
+                            <p:rowEditor /> 
+                        </p:column>
+                        <p:column style="width:6%">  
+                            <p:commandButton update="data-table" type="submit" value="Delete" action="#{recordManagedBean.delete(record.id)}"></p:commandButton> 
+                        </p:column>  
+                    </p:dataTable>  
+                </h:form>
+                <h:form id="form2">
+                    <h:panelGrid id="add-form" columns="2">
+                        <p:inputText value="#{recordManagedBean.content}">
+                            <f:validateLength minimum="1" />
+                        </p:inputText>
+                        <p:commandButton update=":form1:data-table" type="submit" value="Add new note" action="#{recordManagedBean.create}"></p:commandButton> 
+                    </h:panelGrid>
+                </h:form>
+        </h:body>
+
+    </f:view>
+</html>
+
